@@ -1,11 +1,11 @@
 import React from 'react';
 
-const RollDice = ({ GetTotal, diceTotal }) => {
+const RollDice = ({ onRoll, diceTotal, dieRolls }) => {
     return(
         <div>
-            <button onClick={GetTotal}>Roll</button>
-            <h3>Total: {diceTotal}</h3>
-            <h4>Dice Rolls: </h4>
+            <button onClick={ onRoll }>Roll</button>
+            <h3>Total: { diceTotal }</h3>
+            <h4>Dice Rolls: { dieRolls[0] } | { dieRolls[1] }</h4>
         </div>
     );
 }
