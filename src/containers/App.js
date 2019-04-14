@@ -4,12 +4,9 @@ import './App.css';
 import CardIFT from '../components/CardIFT.js';
 // import CardCC from '../components/CardCC';
 
-
 class App extends Component {
   render() {
-    return (
-      <CardIFT className='card-ift' />
-    );
+    return <CardIFT className="card-ift" />;
   }
 }
 
