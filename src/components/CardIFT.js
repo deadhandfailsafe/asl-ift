@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import Random from "random";
+import React, { Component } from 'react';
+import Random from 'random';
 
-import BoxValue from "./BoxValue";
-import CheckBoxValue from "./CheckBoxValue";
-import RollDice from "./RollDice";
+import BoxValue from './BoxValue';
+import CheckBoxValue from './CheckBoxValue';
+import RollDice from './RollDice';
 
+// Initial State variables
 const initialState = {
   diceTotal: 0,
   dieRolls: [0, 0],
@@ -19,16 +20,19 @@ class CardIFT extends Component {
     this.state = initialState;
   }
 
+  // Basically just a 1d6 roller
   generateDie = () => {
     return Random.int(1, 6);
   };
 
+  // 2d6 roller + total
   generateDice = () => {
     let die1 = this.generateDie();
     let die2 = this.generateDie();
     return [die1, die2, die1 + die2];
   };
 
+  // Function that uses the rollers and puts the results into the states. Maybe a little redundantly but allows future expansion.
   onRoll = () => {
     let diceRoll = this.generateDice();
     this.setState({ diceTotal: diceRoll[2] });
