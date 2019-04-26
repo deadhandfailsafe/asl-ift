@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import Random from 'random';
+import React from 'react';
 
 import BoxValue from './BoxValue';
 import CheckBoxValue from './CheckBoxValue';
-import RollDice from './RollDice';
+import DiceRoller from './DiceRoller';
 
 // Initial State variables
 const initialState = {
@@ -14,72 +13,26 @@ const initialState = {
   rateOfFire: 0
 };
 
-class CardIFT extends Component {
-  constructor() {
-    super();
-    this.state = initialState;
-  }
-
-  // Basically just a 1d6 roller
-  generateDie = () => {
-    return Random.int(1, 6);
-  };
-
-  // 2d6 roller + total
-  generateDice = () => {
-    let die1 = this.generateDie();
-    let die2 = this.generateDie();
-    return [die1, die2, die1 + die2];
-  };
-
-  // Function that uses the rollers and puts the results into the states. Maybe a little redundantly but allows future expansion.
-  onRoll = () => {
-    let diceRoll = this.generateDice();
-    this.setState({ diceTotal: diceRoll[2] });
-    this.setState({ dieRolls: [diceRoll[0], diceRoll[1]] });
-  };
-
-  onBoxChange = event => {
-    this.setState({});
-  };
-
-  render() {
-    return (
-      <div>
-        <h2>Infantry Fire Table</h2>
-        <form>
-          <BoxValue
-            title="Firepower"
-            value={this.state.firePower}
-            onBoxChange={this.onBoxChange}
-          />
-          <BoxValue
-            title="Modifier"
-            value={this.state.modifier}
-            onBoxChange={this.onBoxChange}
-          />
-          <BoxValue
-            title="ROF"
-            value={this.state.rateOfFire}
-            onBoxChange={this.onBoxChange}
-          />
-          <CheckBoxValue
-            title="No Cowering: "
-            info="Fire is from a SMC(or led FG), berserk/Fanatic unit, Fire Lane, IFE, Canister, Aircraft, British Elite/First Line unit, Finns, Sniper, ordnance, OBA, any form of vehicular fire, CC, or DC."
-          />
-          <CheckBoxValue
-            title="Double Cowering: "
-            info="Fire is from Inexperienced Personnel"
-          />
-        </form>
-        <RollDice
-          onRoll={this.onRoll}
-          diceTotal={this.state.diceTotal}
-          dieRolls={this.state.dieRolls}
+const CardIFT = () => {
+  return (
+    <div>
+      <h2>Infantry Fire Table</h2>
+      <form>
+        <BoxValue title="Firepower" value={initialState.firePower} />
+        <BoxValue title="Modifier" value={initialState.modifier} />
+        <BoxValue title="ROF" value={initialState.rateOfFire} />
+        <CheckBoxValue
+          title="No Cowering: "
+          info="Fire is from a SMC(or led FG), berserk/Fanatic unit, Fire Lane, IFE, Canister, Aircraft, British Elite/First Line unit, Finns, Sniper, ordnance, OBA, any form of vehicular fire, CC, or DC."
         />
-      </div>
-    );
-  }
-}
+        <CheckBoxValue
+          title="Double Cowering: "
+          info="Fire is from Inexperienced Personnel"
+        />
+      </form>
+      <DiceRoller />
+    </div>
+  );
+};
 
 export default CardIFT;
