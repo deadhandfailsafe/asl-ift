@@ -4,10 +4,8 @@ import BoxValue from './BoxValue';
 import CheckBoxValue from './CheckBoxValue';
 import DiceRoller from './DiceRoller';
 
-// Initial State variables
+// Initial State variables - Old leftovers from this.state which is being cleaned out.
 const initialState = {
-  diceTotal: 0,
-  dieRolls: [0, 0],
   firePower: 0,
   modifier: 0,
   rateOfFire: 0
