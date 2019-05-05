@@ -7,25 +7,33 @@ const generateDieRoll = () => {
 };
 
 // Function that uses the die roller and puts the results into the states for 2d6.
-const generateDiceRoll = (setDieOne, setDieTwo) => {
-  setDieOne(generateDieRoll());
-  setDieTwo(generateDieRoll());
+const generateTotalRoll = (setDieOne, setDieTwo, setDiceTotal, modifier) => {
+  // This was originally just setDieOne(generateDieRoll()) etc., however this allows for better splitting of needs
+  let dieOne = generateDieRoll();
+  let dieTwo = generateDieRoll();
+  setDieOne(dieOne);
+  setDieTwo(dieTwo);
+  setDiceTotal(dieOne + dieTwo + Number(modifier));
 };
 
 const DiceRoller = ({ modifier }) => {
   // Start die states at 0 so people can't cheat with a starting snake eyes pretend roll
   const [dieOne, setDieOne] = useState(0);
   const [dieTwo, setDieTwo] = useState(0);
+  const [diceTotal, setDiceTotal] = useState(0);
 
   return (
     <div>
-      <button onClick={() => generateDiceRoll(setDieOne, setDieTwo)}>
+      <button
+        onClick={() =>
+          generateTotalRoll(setDieOne, setDieTwo, setDiceTotal, modifier)
+        }>
         Roll
       </button>
       <h4>
         Dice Rolls: {dieOne} | {dieTwo}
       </h4>
-      <h3>Total: {dieOne + dieTwo + Number(modifier)}</h3>
+      <h3>Total: {diceTotal}</h3>
     </div>
   );
 };
