@@ -12,7 +12,7 @@ const generateDiceRoll = (setDieOne, setDieTwo) => {
   setDieTwo(generateDieRoll());
 };
 
-const DiceRoller = () => {
+const DiceRoller = ({ modifier }) => {
   // Start die states at 0 so people can't cheat with a starting snake eyes pretend roll
   const [dieOne, setDieOne] = useState(0);
   const [dieTwo, setDieTwo] = useState(0);
@@ -22,10 +22,10 @@ const DiceRoller = () => {
       <button onClick={() => generateDiceRoll(setDieOne, setDieTwo)}>
         Roll
       </button>
-      <h3>Total: {dieOne + dieTwo}</h3>
       <h4>
         Dice Rolls: {dieOne} | {dieTwo}
       </h4>
+      <h3>Total: {dieOne + dieTwo + Number(modifier)}</h3>
     </div>
   );
 };

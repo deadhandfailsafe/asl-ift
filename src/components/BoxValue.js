@@ -1,14 +1,14 @@
 import React from 'react';
 
-const BoxValue = ({ title, boxValue, onBoxChange }) => {
+const BoxValue = ({ title, thisNumberValue, thisStateSet }) => {
   return (
     <div>
       <label>{title}</label>
       <input
         type="number"
         placeholder="0"
-        value={boxValue}
-        onChange={onBoxChange}
+        value={thisNumberValue}
+        onChange={event => thisStateSet(event.target.value)}
       />
     </div>
   );
