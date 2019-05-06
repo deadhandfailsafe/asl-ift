@@ -10,6 +10,8 @@ const CardIFT = () => {
   const [combatModifier, setModifier] = useState(0);
   const [rateOfFire, setRateOfFire] = useState(0);
   const [rofMaintained, setRofMaintained] = useState(false);
+  const [noCowering, setNoCowering] = useState(false);
+  const [doubleCowering, setDoubleCowering] = useState(false);
 
   return (
     <div>
@@ -33,10 +35,14 @@ const CardIFT = () => {
         <CheckBoxValue
           title="No Cowering: "
           info="Fire is from a SMC(or led FG), berserk/Fanatic unit, Fire Lane, IFE, Canister, Aircraft, British Elite/First Line unit, Finns, Sniper, ordnance, OBA, any form of vehicular fire, CC, or DC."
+          thisCheckValue={noCowering}
+          thisStateSet={setNoCowering}
         />
         <CheckBoxValue
           title="Double Cowering: "
           info="Fire is from Inexperienced Personnel"
+          thisCheckValue={doubleCowering}
+          thisStateSet={setDoubleCowering}
         />
       </form>
       <DiceRoller
