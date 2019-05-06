@@ -7,16 +7,31 @@ const generateDieRoll = () => {
 };
 
 // Function that uses the die roller and puts the results into the states for 2d6.
-const generateTotalRoll = (setDieOne, setDieTwo, setDiceTotal, modifier) => {
+const generateTotalRoll = (
+  setDieOne,
+  setDieTwo,
+  setDiceTotal,
+  modifier,
+  currentRateOfFire,
+  rofCheck
+) => {
   // This was originally just setDieOne(generateDieRoll()) etc., however this allows for better splitting of needs
   let dieOne = generateDieRoll();
   let dieTwo = generateDieRoll();
   setDieOne(dieOne);
   setDieTwo(dieTwo);
   setDiceTotal(dieOne + dieTwo + Number(modifier));
+  // Do a ROF Check
+  if (currentRateOfFire === 0 || dieOne > currentRateOfFire) {
+    rofCheck(false);
+  } else if (dieOne <= currentRateOfFire) {
+    rofCheck(true);
+  } else {
+    alert('Rate of Fire ERROR');
+  }
 };
 
-const DiceRoller = ({ modifier }) => {
+const DiceRoller = ({ modifier, currentRateOfFire, rofCheck }) => {
   // Start die states at 0 so people can't cheat with a starting snake eyes pretend roll
   const [dieOne, setDieOne] = useState(0);
   const [dieTwo, setDieTwo] = useState(0);
@@ -26,7 +41,14 @@ const DiceRoller = ({ modifier }) => {
     <div>
       <button
         onClick={() =>
-          generateTotalRoll(setDieOne, setDieTwo, setDiceTotal, modifier)
+          generateTotalRoll(
+            setDieOne,
+            setDieTwo,
+            setDiceTotal,
+            modifier,
+            currentRateOfFire,
+            rofCheck
+          )
         }>
         Roll
       </button>

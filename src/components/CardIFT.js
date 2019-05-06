@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import BoxValue from './BoxValue';
 import CheckBoxValue from './CheckBoxValue';
 import DiceRoller from './DiceRoller';
+import AlertResult from './AlertResult';
 
 const CardIFT = () => {
   const [firePower, setFirePower] = useState(0);
   const [combatModifier, setModifier] = useState(0);
   const [rateOfFire, setRateOfFire] = useState(0);
+  const [rofMaintained, setRofMaintained] = useState(false);
 
   return (
     <div>
@@ -37,7 +39,14 @@ const CardIFT = () => {
           info="Fire is from Inexperienced Personnel"
         />
       </form>
-      <DiceRoller modifier={combatModifier} />
+      <DiceRoller
+        modifier={combatModifier}
+        currentRateOfFire={rateOfFire}
+        rofCheck={setRofMaintained}
+      />
+      {rofMaintained === true && (
+        <AlertResult alertHeader="Rate of Fire Maintained!" />
+      )}
     </div>
   );
 };
