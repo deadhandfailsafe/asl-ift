@@ -13,6 +13,7 @@ const CardIFT = () => {
   const [noCowering, setNoCowering] = useState(false);
   const [doubleCowering, setDoubleCowering] = useState(false);
   const [isCowering, setCowering] = useState(false);
+  const [combatResult, setCombatResult] = useState('');
 
   return (
     <div>
@@ -47,10 +48,12 @@ const CardIFT = () => {
         />
       </form>
       <DiceRoller
+        firePower={firePower}
         modifier={combatModifier}
-        currentRateOfFire={rateOfFire}
-        rofCheck={setRofMaintained}
-        cowering={setCowering}
+        rateOfFire={rateOfFire}
+        setROF={setRofMaintained}
+        setCowering={setCowering}
+        setCombatResult={setCombatResult}
       />
       {rofMaintained === true && (
         <AlertResult alertHeader="Rate of Fire Maintained!" />
@@ -65,6 +68,7 @@ const CardIFT = () => {
         noCowering === false && (
           <AlertResult alertHeader="The Fire Group Double Cowers!" />
         )}
+      {combatResult !== '' && <AlertResult alertHeader={combatResult} />}
     </div>
   );
 };
