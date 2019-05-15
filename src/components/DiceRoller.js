@@ -13,7 +13,8 @@ const generateTotalRoll = (
   setDiceTotal,
   modifier,
   currentRateOfFire,
-  rofCheck
+  rofCheck,
+  cowering
 ) => {
   // This was originally just setDieOne(generateDieRoll()) etc., however this allows for better splitting of needs
   let dieOne = generateDieRoll();
@@ -29,9 +30,15 @@ const generateTotalRoll = (
   } else {
     alert('Rate of Fire ERROR');
   }
+  // Do a Cowering Check
+  if (dieOne === dieTwo) {
+    cowering(true);
+  } else {
+    cowering(false);
+  }
 };
 
-const DiceRoller = ({ modifier, currentRateOfFire, rofCheck }) => {
+const DiceRoller = ({ modifier, currentRateOfFire, rofCheck, cowering }) => {
   // Start die states at 0 so people can't cheat with a starting snake eyes pretend roll
   const [dieOne, setDieOne] = useState(0);
   const [dieTwo, setDieTwo] = useState(0);
@@ -47,7 +54,8 @@ const DiceRoller = ({ modifier, currentRateOfFire, rofCheck }) => {
             setDiceTotal,
             modifier,
             currentRateOfFire,
-            rofCheck
+            rofCheck,
+            cowering
           )
         }>
         Roll

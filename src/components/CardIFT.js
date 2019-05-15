@@ -12,6 +12,7 @@ const CardIFT = () => {
   const [rofMaintained, setRofMaintained] = useState(false);
   const [noCowering, setNoCowering] = useState(false);
   const [doubleCowering, setDoubleCowering] = useState(false);
+  const [isCowering, setCowering] = useState(false);
 
   return (
     <div>
@@ -49,10 +50,21 @@ const CardIFT = () => {
         modifier={combatModifier}
         currentRateOfFire={rateOfFire}
         rofCheck={setRofMaintained}
+        cowering={setCowering}
       />
       {rofMaintained === true && (
         <AlertResult alertHeader="Rate of Fire Maintained!" />
       )}
+      {isCowering === true &&
+        noCowering === false &&
+        doubleCowering === false && (
+          <AlertResult alertHeader="The Fire Group Cowers!" />
+        )}
+      {isCowering === true &&
+        doubleCowering === true &&
+        noCowering === false && (
+          <AlertResult alertHeader="The Fire Group Double Cowers!" />
+        )}
     </div>
   );
 };
