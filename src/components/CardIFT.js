@@ -6,7 +6,7 @@ import DiceRoller from './DiceRoller';
 import AlertResult from './AlertResult';
 
 const CardIFT = () => {
-  const [firePower, setFirePower] = useState(0);
+  const [firePower, setFirePower] = useState(1);
   const [combatModifier, setModifier] = useState(0);
   const [rateOfFire, setRateOfFire] = useState(0);
   const [rofMaintained, setRofMaintained] = useState(false);
@@ -54,6 +54,8 @@ const CardIFT = () => {
         setROF={setRofMaintained}
         setCowering={setCowering}
         setCombatResult={setCombatResult}
+        doubleCowering={doubleCowering}
+        noCowering={noCowering}
       />
       {rofMaintained === true && (
         <AlertResult alertHeader="Rate of Fire Maintained!" />

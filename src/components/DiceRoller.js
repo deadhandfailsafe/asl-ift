@@ -41,29 +41,63 @@ const determineFPColumn = firePower => {
 };
 
 // Function that uses the die roller and puts the results into the states for 2d6.
-const generateTotalRoll = (
-  setDieOne,
-  setDieTwo,
-  setDiceTotal,
-  firePower,
-  modifier,
-  rateOfFire,
-  setROF,
-  setCowering,
-  setCombatResult
-) => {
+const generateTotalRoll = props => {
   // This was originally just setDieOne(generateDieRoll()) etc., however this allows for better splitting of needs.
   let dieOne = generateDieRoll();
   let dieTwo = generateDieRoll();
   // Set die states.
-  setDieOne(dieOne);
-  setDieTwo(dieTwo);
-  setDiceTotal(dieOne + dieTwo + Number(modifier));
+  props.setDieOne(dieOne);
+  props.setDieTwo(dieTwo);
+  let resultTotal = dieOne + dieTwo + Number(props.modifier);
+  props.setDiceTotal(resultTotal);
+  // Adjust result total to properly read the table if higher/lower than set values. This is how the game rules work anyways.
+  if (resultTotal > 15) {
+    resultTotal = 15;
+  } else if (resultTotal < 0) {
+    resultTotal = 0;
+  }
   // Do ROF/Cowering checks and set their states respectively.
-  setROF(checkROF(dieOne, rateOfFire));
-  setCowering(checkCowering(dieOne, dieTwo));
-  // DO FP
-  console.log(determineFPColumn(firePower));
+  props.setROF(checkROF(dieOne, props.rateOfFire));
+  let cowerCheck = checkCowering(dieOne, dieTwo);
+  props.setCowering(cowerCheck);
+  // Determine the correct FP column to use and then set the result accordingly with dice roll.
+  let currentFPColumn = determineFPColumn(props.firePower);
+  // FP Can't be 0
+  if (currentFPColumn !== 0) {
+    // Adjust FP column further based on whether the unit cowers or not
+    if (
+      cowerCheck === true &&
+      props.doubleCowering === false &&
+      props.noCowering === false
+    ) {
+      // If a cower goes off the table it's no result.
+      if (currentFPColumn === 1) {
+        currentFPColumn = 0;
+        props.setCombatResult('No Result Due To Cower');
+      } else {
+        let columnIndex = dataIFT['keymap'].indexOf(currentFPColumn);
+        currentFPColumn = dataIFT['keymap'][columnIndex - 1];
+      }
+    } else if (
+      cowerCheck === true &&
+      props.doubleCowering === true &&
+      props.noCowering === false
+    ) {
+      // If a cower goes off the table it's no result.
+      if (currentFPColumn === 1 || currentFPColumn === 2) {
+        currentFPColumn = 0;
+        props.setCombatResult('No Result Due To Cower');
+      } else {
+        let columnIndex = dataIFT['keymap'].indexOf(currentFPColumn);
+        currentFPColumn = dataIFT['keymap'][columnIndex - 2];
+      }
+    }
+    console.log(currentFPColumn);
+    // If a cower goes off this has already been set to No Result.
+    if (currentFPColumn !== 0) {
+      props.setCombatResult(dataIFT[currentFPColumn][resultTotal]);
+    }
+  }
 };
 
 const DiceRoller = ({
@@ -72,7 +106,9 @@ const DiceRoller = ({
   rateOfFire,
   setROF,
   setCowering,
-  setCombatResult
+  setCombatResult,
+  noCowering,
+  doubleCowering
 }) => {
   // Start die states at 0 so people can't cheat with a starting snake eyes pretend roll.
   const [dieOne, setDieOne] = useState(0);
@@ -83,7 +119,8 @@ const DiceRoller = ({
     <div>
       <button
         onClick={() =>
-          generateTotalRoll(
+          generateTotalRoll({
+            diceTotal,
             setDieOne,
             setDieTwo,
             setDiceTotal,
@@ -92,8 +129,10 @@ const DiceRoller = ({
             rateOfFire,
             setROF,
             setCowering,
-            setCombatResult
-          )
+            setCombatResult,
+            noCowering,
+            doubleCowering
+          })
         }>
         Roll
       </button>
