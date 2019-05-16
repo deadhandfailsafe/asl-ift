@@ -92,7 +92,6 @@ const generateTotalRoll = props => {
         currentFPColumn = dataIFT['keymap'][columnIndex - 2];
       }
     }
-    console.log(currentFPColumn);
     // If a cower goes off this has already been set to No Result.
     if (currentFPColumn !== 0) {
       props.setCombatResult(dataIFT[currentFPColumn][resultTotal]);
