@@ -41,7 +41,7 @@ const determineFPColumn = firePower => {
 };
 
 // Function that uses the die roller and puts the results into the states for 2d6.
-const generateTotalRoll = props => {
+const rollTheDice = props => {
   // This was originally just setDieOne(generateDieRoll()) etc., however this allows for better splitting of needs.
   let dieOne = generateDieRoll();
   let dieTwo = generateDieRoll();
@@ -73,7 +73,7 @@ const generateTotalRoll = props => {
       // If a cower goes off the table it's no result.
       if (currentFPColumn === 1) {
         currentFPColumn = 0;
-        props.setCombatResult('No Result Due To Cower');
+        props.setCombatResult('No Result Due To Cowering.');
       } else {
         let columnIndex = dataIFT['keymap'].indexOf(currentFPColumn);
         currentFPColumn = dataIFT['keymap'][columnIndex - 1];
@@ -86,7 +86,7 @@ const generateTotalRoll = props => {
       // If a cower goes off the table it's no result.
       if (currentFPColumn === 1 || currentFPColumn === 2) {
         currentFPColumn = 0;
-        props.setCombatResult('No Result Due To Cower');
+        props.setCombatResult('No Result Due To Cowering.');
       } else {
         let columnIndex = dataIFT['keymap'].indexOf(currentFPColumn);
         currentFPColumn = dataIFT['keymap'][columnIndex - 2];
@@ -99,7 +99,7 @@ const generateTotalRoll = props => {
   }
 };
 
-const DiceRoller = ({
+const DiceRollerIFT = ({
   firePower,
   modifier,
   rateOfFire,
@@ -118,7 +118,7 @@ const DiceRoller = ({
     <div>
       <button
         onClick={() =>
-          generateTotalRoll({
+          rollTheDice({
             diceTotal,
             setDieOne,
             setDieTwo,
@@ -143,4 +143,4 @@ const DiceRoller = ({
   );
 };
 
-export default DiceRoller;
+export default DiceRollerIFT;

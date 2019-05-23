@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 import BoxValue from './BoxValue';
 import CheckBoxValue from './CheckBoxValue';
-import DiceRoller from './DiceRoller';
+import DiceRollerIFT from './DiceRollerIFT';
 import AlertResult from './AlertResult';
 
 const CardIFT = () => {
   const [firePower, setFirePower] = useState(1);
-  const [combatModifier, setModifier] = useState(0);
+  const [combatModifier, setCombatModifier] = useState(0);
   const [rateOfFire, setRateOfFire] = useState(0);
   const [rofMaintained, setRofMaintained] = useState(false);
   const [noCowering, setNoCowering] = useState(false);
@@ -20,14 +20,14 @@ const CardIFT = () => {
       <h2>Infantry Fire Table</h2>
       <form>
         <BoxValue
-          title="Firepower"
+          title="FirePower"
           thisNumberValue={firePower}
           thisStateSet={setFirePower}
         />
         <BoxValue
           title="Modifier"
           thisNumberValue={combatModifier}
-          thisStateSet={setModifier}
+          thisStateSet={setCombatModifier}
         />
         <BoxValue
           title="ROF"
@@ -47,7 +47,7 @@ const CardIFT = () => {
           thisStateSet={setDoubleCowering}
         />
       </form>
-      <DiceRoller
+      <DiceRollerIFT
         firePower={firePower}
         modifier={combatModifier}
         rateOfFire={rateOfFire}
