@@ -3,12 +3,15 @@ import React, { useState } from 'react';
 import BoxValue from './BoxValue';
 import CheckBoxValue from './CheckBoxValue';
 import DiceRollerCC from './DiceRollerCC';
+import AlertResult from './AlertResult';
 
 const CardCC = () => {
   const [atkFirePower, setAtkFirePower] = useState(0);
   const [defFirePower, setDefFirePower] = useState(0);
   const [closeCombatModifier, setCloseCombatModifier] = useState(0);
   const [handToHand, setHandToHand] = useState(false);
+  const [combatRatio, setCombatRatio] = useState('');
+  const [closeCombatResult, setCloseCombatResult] = useState('');
 
   return (
     <div>
@@ -40,7 +43,14 @@ const CardCC = () => {
         atkFirePower={atkFirePower}
         defFirePower={defFirePower}
         closeCombatModifier={closeCombatModifier}
+        handToHand={handToHand}
+        setCombatRatio={setCombatRatio}
+        setCloseCombatResult={setCloseCombatResult}
       />
+      {combatRatio !== '' && <AlertResult alertHeader={combatRatio} />}
+      {closeCombatResult !== '' && (
+        <AlertResult alertHeader={closeCombatResult} />
+      )}
     </div>
   );
 };
