@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import BoxValue from './BoxValue';
 import CheckBoxValue from './CheckBoxValue';
 import DiceRollerCC from './DiceRollerCC';
 import AlertResult from './AlertResult';
 
+const ContainerCC = styled.div`
+  background-color: #212121;
+
+  h2 {
+    background-color: #ff4252;
+    padding-left: 3px;
+    padding-bottom: 5px;
+  }
+`;
+
 const CardCC = () => {
-  const [atkFirePower, setAtkFirePower] = useState(0);
+  const [atkFirePower, setAtkFirePower] = useState(1);
   const [defFirePower, setDefFirePower] = useState(0);
   const [closeCombatModifier, setCloseCombatModifier] = useState(0);
   const [handToHand, setHandToHand] = useState(false);
@@ -14,7 +25,7 @@ const CardCC = () => {
   const [closeCombatResult, setCloseCombatResult] = useState('');
 
   return (
-    <div>
+    <ContainerCC>
       <h2>Close Combat Table</h2>
       <form>
         <BoxValue
@@ -51,7 +62,7 @@ const CardCC = () => {
       {closeCombatResult !== '' && (
         <AlertResult alertHeader={closeCombatResult} />
       )}
-    </div>
+    </ContainerCC>
   );
 };
 

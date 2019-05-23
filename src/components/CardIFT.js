@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import BoxValue from './BoxValue';
 import CheckBoxValue from './CheckBoxValue';
 import DiceRollerIFT from './DiceRollerIFT';
 import AlertResult from './AlertResult';
+
+const ContainerIFT = styled.div`
+  background-color: #212121;
+
+  h2 {
+    background-color: #ff6942;
+    padding-left: 3px;
+    padding-bottom: 5px;
+  }
+`;
 
 const CardIFT = () => {
   const [firePower, setFirePower] = useState(1);
@@ -16,7 +27,7 @@ const CardIFT = () => {
   const [combatResult, setCombatResult] = useState('');
 
   return (
-    <div>
+    <ContainerIFT>
       <h2>Infantry Fire Table</h2>
       <form>
         <BoxValue
@@ -71,7 +82,7 @@ const CardIFT = () => {
           <AlertResult alertHeader="The Fire Group Double Cowers!" />
         )}
       {combatResult !== '' && <AlertResult alertHeader={combatResult} />}
-    </div>
+    </ContainerIFT>
   );
 };
 

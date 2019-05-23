@@ -1,6 +1,6 @@
 #ASL-IFT
 
-A player aid for Advanced Squad Leader, covering the Infantry Fire Table, Incremental Infantry Fire Table, and Close Combat.
+A player aid for Advanced Squad Leader, covering the Infantry Fire Table, and Close Combat.
 
 More might come later.
 
