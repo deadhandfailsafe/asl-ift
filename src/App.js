@@ -21,7 +21,7 @@ const Container = styled.div`
 function App() {
   return (
     <Container>
-      <h1>Advanced Squad Leader Combat Table Assisstant</h1>
+      <h1>Advanced Squad Leader Combat Table Assistant</h1>
       <div>
         <CardIFT className="card-ift" />
         <CardCC className="card-cc" />
