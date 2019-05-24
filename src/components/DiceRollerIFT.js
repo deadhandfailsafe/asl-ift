@@ -1,7 +1,26 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import Random from 'random';
 
 import dataIFT from '../data/dataIFT.json';
+
+const Roller = styled.div`
+  text-align: center;
+
+  span {
+    color: #ff6942;
+  }
+`;
+
+const RollButton = styled.button`
+  width: 8em;
+  height: 2em;
+  background-color: #db5538;
+  color: #763b3b;
+  border: 3px solid #763b3b;
+  border-radius: 2px;
+  font-size: 2em;
+`;
 
 // Simple function to generate a 1d6 die roll.
 const generateDieRoll = () => {
@@ -115,8 +134,8 @@ const DiceRollerIFT = ({
   const [diceTotal, setDiceTotal] = useState(0);
 
   return (
-    <div>
-      <button
+    <Roller>
+      <RollButton
         onClick={() =>
           rollTheDice({
             diceTotal,
@@ -134,12 +153,12 @@ const DiceRollerIFT = ({
           })
         }>
         Roll
-      </button>
+      </RollButton>
       <h4>
-        Dice Rolls: {dieOne} | {dieTwo}
+        Dice Rolls: <span>{dieOne}</span> | {dieTwo}
       </h4>
       <h3>Total: {diceTotal}</h3>
-    </div>
+    </Roller>
   );
 };
 

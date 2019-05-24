@@ -8,11 +8,27 @@ import AlertResult from './AlertResult';
 
 const ContainerCC = styled.div`
   background-color: #212121;
+  padding-bottom: 0.5em;
 
   h2 {
     background-color: #ff4252;
     padding-left: 3px;
-    padding-bottom: 5px;
+    padding-bottom: 3px;
+  }
+  form {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+  }
+  .div-boxes {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+    padding-bottom: 1em;
+  }
+  .div-roller {
+    display: flex;
+    justify-content: center;
   }
 `;
 
@@ -28,21 +44,23 @@ const CardCC = () => {
     <ContainerCC>
       <h2>Close Combat Table</h2>
       <form>
-        <BoxValue
-          title="Attacker's FirePower"
-          thisNumberValue={atkFirePower}
-          thisStateSet={setAtkFirePower}
-        />
-        <BoxValue
-          title="Defender's FirePower"
-          thisNumberValue={defFirePower}
-          thisStateSet={setDefFirePower}
-        />
-        <BoxValue
-          title="Modifier"
-          thisNumberValue={closeCombatModifier}
-          thisStateSet={setCloseCombatModifier}
-        />
+        <div className="div-boxes">
+          <BoxValue
+            title="Attacker's FirePower"
+            thisNumberValue={atkFirePower}
+            thisStateSet={setAtkFirePower}
+          />
+          <BoxValue
+            title="Defender's FirePower"
+            thisNumberValue={defFirePower}
+            thisStateSet={setDefFirePower}
+          />
+          <BoxValue
+            title="Modifier"
+            thisNumberValue={closeCombatModifier}
+            thisStateSet={setCloseCombatModifier}
+          />
+        </div>
         <CheckBoxValue
           title="Hand To Hand"
           info=""
@@ -50,14 +68,16 @@ const CardCC = () => {
           thisStateSet={setHandToHand}
         />
       </form>
-      <DiceRollerCC
-        atkFirePower={atkFirePower}
-        defFirePower={defFirePower}
-        closeCombatModifier={closeCombatModifier}
-        handToHand={handToHand}
-        setCombatRatio={setCombatRatio}
-        setCloseCombatResult={setCloseCombatResult}
-      />
+      <div className="div-roller">
+        <DiceRollerCC
+          atkFirePower={atkFirePower}
+          defFirePower={defFirePower}
+          closeCombatModifier={closeCombatModifier}
+          handToHand={handToHand}
+          setCombatRatio={setCombatRatio}
+          setCloseCombatResult={setCloseCombatResult}
+        />
+      </div>
       {combatRatio !== '' && <AlertResult alertHeader={combatRatio} />}
       {closeCombatResult !== '' && (
         <AlertResult alertHeader={closeCombatResult} />

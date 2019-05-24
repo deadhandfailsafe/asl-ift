@@ -1,8 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const CheckBox = styled.div`
+  padding-bottom: 5px;
+`;
 
 const CheckBoxValue = ({ title, info, thisCheckValue, thisStateSet }) => {
   return (
-    <div>
+    <CheckBox>
       <label>
         <input
           type="checkbox"
@@ -12,7 +17,7 @@ const CheckBoxValue = ({ title, info, thisCheckValue, thisStateSet }) => {
         <strong>{title}</strong>
         {info}
       </label>
-    </div>
+    </CheckBox>
   );
 };
 

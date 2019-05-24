@@ -1,7 +1,26 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import Random from 'random';
 
 import dataCC from '../data/dataCC.json';
+
+const Roller = styled.div`
+  text-align: center;
+
+  span {
+    color: #ff4252;
+  }
+`;
+
+const RollButton = styled.button`
+  width: 8em;
+  height: 2em;
+  background-color: #d43346;
+  color: #802343;
+  border: 3px solid #802343;
+  border-radius: 2px;
+  font-size: 2em;
+`;
 
 // Simple function to generate a 1d6 die roll.
 const generateDieRoll = () => {
@@ -67,8 +86,8 @@ const DiceRollerCC = ({
   const [diceTotal, setDiceTotal] = useState(0);
 
   return (
-    <div>
-      <button
+    <Roller>
+      <RollButton
         onClick={() =>
           rollTheDice({
             setDieOne,
@@ -83,12 +102,12 @@ const DiceRollerCC = ({
           })
         }>
         Roll
-      </button>
+      </RollButton>
       <h4>
-        Dice Rolls: {dieOne} | {dieTwo}
+        Dice Rolls: <span>{dieOne}</span> | {dieTwo}
       </h4>
       <h3>Total: {diceTotal}</h3>
-    </div>
+    </Roller>
   );
 };
 

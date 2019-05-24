@@ -1,8 +1,22 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Box = styled.div`
+  display: flex;
+  flex-flow: column;
+  width: 10em;
+
+  label {
+    padding-bottom: 0.5em;
+  }
+  input {
+    font-size: 2em;
+  }
+`;
 
 const BoxValue = ({ title, thisNumberValue, thisStateSet }) => {
   return (
-    <div>
+    <Box>
       <label>{title}</label>
       <input
         type="number"
@@ -10,7 +24,7 @@ const BoxValue = ({ title, thisNumberValue, thisStateSet }) => {
         value={thisNumberValue}
         onChange={event => thisStateSet(event.target.value)}
       />
-    </div>
+    </Box>
   );
 };
 
