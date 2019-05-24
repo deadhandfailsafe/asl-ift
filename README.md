@@ -8,3 +8,10 @@ This is an attempt to remake the player aid I originally made with Angular 1 bac
 
 - http://deadhandfailsafe.github.io/asliift/
 - https://github.com/deadhandfailsafe/deadhandfailsafe.github.io/tree/master/asliift
+
+###TODO
+
+- Implement some box styling
+- Clean up some of the code
+- Make combat results change colors based on results
+- Add Favicon
