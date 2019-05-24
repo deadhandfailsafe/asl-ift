@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/asl-ift/precache-manifest.c9700348e4fbb378c8dc405983992a83.js"
+  "/asl-ift/precache-manifest.3b799968bbaa2419b6e1d60746f28aa8.js"
 );
 
 workbox.clientsClaim();
